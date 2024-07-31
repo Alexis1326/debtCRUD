@@ -39,7 +39,7 @@ export class debtCrudService {
 
   public async createDebt(newDebtRequest: DebtCrudRequest): Promise<ApiResponseDto> {
     try {
-      newDebtRequest.namePerson = newDebtRequest.namePerson.toLowerCase();
+      newDebtRequest.namePerson = newDebtRequest.namePerson.toLowerCase().trim();
       const existingDebt = await this.DebtModel.findOne({ namePerson: newDebtRequest.namePerson });
 
       if (existingDebt) {

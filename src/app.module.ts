@@ -7,6 +7,7 @@ import { postInfoModule } from './postInfo/interfaces/module/postInfo.module';
 import { getAllUserModule } from './getAllUser/interfaces/module/getAllUser.module';
 import { getUserModule } from './getUser/interfaces/module/getUser.module';
 import { updateUserModule } from './updateUser/interfaces/module/updateUser.module';
+import { deleteUserModule } from './deleteUser/interfaces/module/deleteUser.module';
 
 /**
  *  @description clase anotada con un decorador @Module(). El decorador @Module() proporciona
@@ -26,6 +27,7 @@ import { updateUserModule } from './updateUser/interfaces/module/updateUser.modu
     getAllUserModule,
     getUserModule,
     updateUserModule,
+    deleteUserModule,
     GlobalModule,
     MongooseModule.forRoot('mongodb://localhost:27017/crud-deudas'),
   ],
