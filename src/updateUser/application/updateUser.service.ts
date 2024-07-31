@@ -30,21 +30,13 @@ export class updateUserService {
     private readonly DebtModel: Model<Debt>
   ) { }
 
-  async findOne(term: string) {
-
+  async findOne(term: string): Promise<Debt> {
     let user: Debt;
 
-    if (!isNaN(+term)) {
-      user = await this.DebtModel.findOne({ no: term });
-    }
-
-    // Name
-    if (!user) {
-      user = await this.DebtModel.findOne({ name: term.toLowerCase().trim() })
-    }
+    user = await this.DebtModel.findOne({ namePerson: term.toLowerCase().trim() });
 
     if (!user)
-      throw new NotFoundException(`Pokemon with id, name or no "${term}" not found`);
+      throw new NotFoundException(`Debt with namePerson "${term}" not found`);
 
     return user;
   }
@@ -56,7 +48,7 @@ export class updateUserService {
       if (updateDebtDto.namePerson)
         updateDebtDto.namePerson = updateDebtDto.namePerson.toLowerCase();
 
-      await userUpdate.updateOne(updateDebtDto, { new: true });
+      await this.DebtModel.updateOne({ _id: userUpdate._id }, updateDebtDto, { new: true });
       this.logger.log('Debt updated successfully');
       return new ApiResponseDto(200, 'Debt updated successfully', userUpdate);
     } catch (error) {
